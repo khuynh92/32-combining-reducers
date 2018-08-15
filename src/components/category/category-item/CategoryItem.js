@@ -18,16 +18,13 @@ class CategoryItem extends Component {
 
 const ListItem = (props) => {
   return (
-    <li onDoubleClick={() => props.editCurrent(props.category)}>
-      <button onClick={() => props.categoryDestroy(props.category)}>x</button>
-      <div>
+    <li>
+      <button id="cat-delete" onClick={() => props.categoryDestroy(props.category)}>x</button>
+      <div onDoubleClick={() => props.editCurrent(props.category)}>
         <h4 className="category-name">{props.category.name}</h4>
         <p> Budget: ${props.category.budget}</p>
-        <br />
-        <h6>Expenses:</h6>
-        <br />
-        <ExpenseContainer category={props.category}/>
       </div>
+      <ExpenseContainer category={props.category} />
     </li>
   );
 };

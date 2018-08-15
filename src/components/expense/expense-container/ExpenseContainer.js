@@ -27,11 +27,16 @@ class ExpenseContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.showAddBtn && <button onClick={this.newForm}>+</button>}
-        <ul>
+        <h6>Expenses:</h6>
+        <ul id="expenses">
           {this.props.expenses.filter(expense => this.props.category.id === expense.categoryID).map(expense => <ExpenseItem expense={expense} key={expense.id} />)}
         </ul>
+
         {this.state.showExpenseForm && <ExpenseForm buttonText='submit' onComplete={this.props.expenseCreate} category={this.props.category} handleCancel={this.handleCancel} />}
+
+        {this.state.showAddBtn && <button id="add-button" onClick={this.newForm}>+</button>}
+
+        {this.props.expenses.filter(expense => this.props.category.id === expense.categoryID).length > 0 && <p id="updateText">* To update an expense, double click on the expense you want to update *</p>}
       </React.Fragment>
     );
   }

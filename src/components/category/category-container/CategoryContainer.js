@@ -14,7 +14,7 @@ class CategoryContainer extends Component {
         <ul id="category-list">
           {this.props.categories.map(category => <CategoryItem editing={category.editing} key={category.id} category={category} />)}
         </ul>
-        {this.props.categories.length > 0 && <p id="updateText">* To update a note, double click the note you want to update *</p>}
+        {this.props.categories.length > 0 && <p id="updateText">* To update a category, double click on the category title/budget you want to update *</p>}
       </React.Fragment>
     );
   }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+
+import './ExpenseForm.scss';
 export default class ExpenseForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      expense: '',
-      price: '',
+      expense: this.props.expense && this.props.expense.expense || '',
+      price: this.props.expense && this.props.expense.price || '',
     };
   }
 
@@ -15,7 +17,15 @@ export default class ExpenseForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onComplete({ ...this.state, categoryID: this.props.category.id });
+    if (this.props.expense) {
+      let newExpense = {
+        ...this.props.expense,
+        expense: this.state.expense,
+        price: this.state.price,
+      };
+      this.props.onComplete(newExpense);
+    }
+    this.props.onComplete({ ...this.state, categoryID: this.props.category.id, editing: false });
 
     this.setState({
       expense: '',
@@ -28,7 +38,7 @@ export default class ExpenseForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit} >
+        <form id="expense-form" onSubmit={this.handleSubmit} >
           <label >
             Expense :
             <input type="text" name="expense" onChange={this.handleChange} value={this.state.expense} />

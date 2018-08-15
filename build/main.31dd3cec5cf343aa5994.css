@@ -79,8 +79,8 @@ button:focus {
   font-style: italic;
   color: #979595; }
 
-#category-list div {
-  margin: 0 auto 0 auto;
+#category-list li div {
+  width: 100%;
   text-align: center; }
 
 #category-list li div h4, #category-list li div p, .category-name {
