@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
     case 'EXPENSE_UPDATE':return {};
     case 'EXPENSE_DESTROY': return {};
     case 'EXPENSE_EDIT': return {};
-    case 'CANCEL_BUTTON': return {};
+    // case 'CANCEL_BUTTON': return {};
 
     default: return state;
   }

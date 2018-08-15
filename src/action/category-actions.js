@@ -29,11 +29,11 @@ export const editCurrent = category => {
     type: 'CATEGORY_EDIT',
     payload: category,
   };
-}
+};
 
 export const cancelBtn = category => {
   return {
     type: 'CANCEL_BUTTON',
     payload: category,
   };
-}
+};
