@@ -50,7 +50,7 @@ export default class ExpenseForm extends Component {
           <br />
           <input type="submit" />
         </form>
-        <button onClick={this.props.handleCancel}>cancel</button>
+        <button id="expense-cancel"onClick={this.props.handleCancel}>cancel</button>
       </React.Fragment>
     );
   }

@@ -13,7 +13,7 @@ class ExpenseItem extends Component {
 
 const ListItem = (props) => {
   return (
-    <li onDoubleClick={() => props.editCurrent(props.expense)}><button onClick={() => props.expenseDestroy(props.expense)}>x</button>{props.expense.expense}: ${props.expense.price}</li>
+    <li onDoubleClick={() => props.editCurrent(props.expense)}><button id="ex-delete"onClick={() => props.expenseDestroy(props.expense)}>x</button>{props.expense.expense}: ${props.expense.price}</li>
   );
 };
 

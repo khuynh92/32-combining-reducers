@@ -5,8 +5,8 @@ import * as actions from '../../../src/action/category-actions.js';
 describe('category reducer', () => {
 
   it('state should be an empty array at start', () => {
-    const newState = reducer([],{payload: 'fake payload', type: 'fake action'});
-    expect(newState).toEqual([]);
+    const newState = reducer({},{payload: 'fake payload', type: 'fake action'});
+    expect(newState).toEqual({});
   });
 
   it('should add a note to state', () => {
@@ -16,15 +16,18 @@ describe('category reducer', () => {
       budget: 'budget',
     };
 
-    const newState = reducer([], actions.categoryCreate(newCategory));
+    let state = {
+      categories: [],
+      expenses: [],
+    };
 
-    expect(newState.length).toBe(1);
+    const newState = reducer(state, actions.categoryCreate(newCategory));
 
-    expect(newState[0].name).toBe('name');
-    expect(newState[0].budget).toBe('budget');
-    expect(newState[0].id).toBeDefined();
-    expect(newState[0].timeStamp  ).toBeDefined();
-    expect(newState[0].editing).toBeFalsy();
+    expect(newState.categories[0].name).toBe('name');
+    expect(newState.categories[0].budget).toBe('budget');
+    expect(newState.categories[0].id).toBeDefined();
+    expect(newState.categories[0].timeStamp  ).toBeDefined();
+    expect(newState.categories[0].editing).toBeFalsy();
   });
 
   it('state should update an existing category', () => {
@@ -34,10 +37,15 @@ describe('category reducer', () => {
       budget: 'budget',
     };
 
-    const newState = reducer([], actions.categoryCreate(newCategory));
+    let state = {
+      categories: [],
+      expenses: [],
+    };
+
+    const newState = reducer(state, actions.categoryCreate(newCategory));
     
-    const id = newState[0].id;
-    const timeStamp = newState[0].timeStamp;
+    const id = newState.categories[0].id;
+    const timeStamp = newState.categories[0].timeStamp;
 
     let newerCategory = {
       name: 'new name',
@@ -49,25 +57,31 @@ describe('category reducer', () => {
 
     const newerState = reducer(newState, actions.categoryUpdate(newerCategory));
 
-    expect(newerState.length).toBe(1);
-    expect(newerState[0].name).toBe('new name');
-    expect(newerState[0].budget).toBe('new budget');
-    expect(newerState[0].id).toBe(newState[0].id);
+    expect(newerState.categories.length).toBe(1);
+    expect(newerState.categories[0].name).toBe('new name');
+    expect(newerState.categories[0].budget).toBe('new budget');
+    expect(newerState.categories[0].id).toBe(id);
   });
 
   it('should remove an existing category', () => {
+
     let newCategory = {
       name: 'name',
       budget: 'budget',
     };
 
-    const newState = reducer([], actions.categoryCreate(newCategory));
+    let state = {
+      categories: [],
+      expenses: [],
+    };
 
-    expect(newState.length).toBe(1);
+    const newState = reducer(state, actions.categoryCreate(newCategory));
+
+    expect(newState.categories.length).toBe(1);
 
     const newerState = reducer(newState, actions.categoryDestroy(newCategory));
 
-    expect(newerState.length).toBe(0);
+    expect(newerState.categories.length).toBe(0);
   });
 
   it('should change a categories editing key to be true', () => {
@@ -76,15 +90,20 @@ describe('category reducer', () => {
       budget: 'budget',
     };
 
-    const newState = reducer([], actions.categoryCreate(newCategory));
+    let state = {
+      categories: [],
+      expenses: [],
+    };
 
-    expect(newState[0].edting).toBeFalsy();
+    const newState = reducer(state, actions.categoryCreate(newCategory));
 
-    let category = newState[0];
+    expect(newState.categories[0].edting).toBeFalsy();
+
+    let category = newState.categories[0];
 
     const newerState = reducer(newState, actions.editCurrent(category));
 
-    expect(newerState[0].editing).toBeTruthy();
+    expect(newerState.categories[0].editing).toBeTruthy();
   });
 
   it('should change a categories editing key to be false', () => {
@@ -93,20 +112,25 @@ describe('category reducer', () => {
       name: 'name',
       budget: 'budget',
     };
+
+    let state = {
+      categories: [],
+      expenses: [],
+    };
     
-    const newState = reducer([], actions.categoryCreate(newCategory));
+    const newState = reducer(state, actions.categoryCreate(newCategory));
 
-    expect(newState[0].edting).toBeFalsy();
+    expect(newState.categories[0].edting).toBeFalsy();
 
-    let category = newState[0];
+    let category = newState.categories[0];
 
     const newerState = reducer(newState, actions.editCurrent(category));
 
-    expect(newerState[0].editing).toBeTruthy();
+    expect(newerState.categories[0].editing).toBeTruthy();
 
-    const newestState = reducer(newerState, actions.cancelBtn(newerState[0]));
+    const newestState = reducer(newerState, actions.cancelBtn(newerState.categories[0]));
 
-    expect(newestState[0].editing).toBeFalsy();
+    expect(newestState.categories[0].editing).toBeFalsy();
 
   });
 

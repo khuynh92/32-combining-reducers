@@ -1,12 +1,20 @@
+.editing * {
+  display: inline;
+}
+
 #category-list .editing {
   background-color: rgb(248, 219, 231);
   transition: 350ms;
 }
 
 #category-list .editing button{
+  margin-left: 175px;
   height: 40px;
   width: 70px;
-  background-color: rgba(229, 137, 137, 0.661)
+  background-color: rgba(229, 137, 137, 0.661);
+  border:none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #category-list .editing button:hover{
